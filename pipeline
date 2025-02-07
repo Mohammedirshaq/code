@@ -1,0 +1,24 @@
+pipeline {
+  agent any
+  environment {
+     GOOGLE_APPLICATION_CREDENTIALS = credentials('key-terraform') 
+  }
+  stages {
+     stage ("connecting to git") {
+        steps{
+          git branch : "main", url : "https://github.com/Mohammedirshaq/code.git"
+        }
+    }
+
+    stage ("terraform initlation"){
+        steps{
+         
+          sh "terraform init"
+          sh "terraform destory -auto-approve" 
+          sh "terraform plan"
+          sh "terraform apply -auto-approve"  
+        }
+    }
+  }
+
+}
