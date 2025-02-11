@@ -1,5 +1,6 @@
 pipeline {
-  agent any
+  agent {
+      lable "agent-2"
   environment {
      GOOGLE_APPLICATION_CREDENTIALS = credentials('key-terraform') 
   }
